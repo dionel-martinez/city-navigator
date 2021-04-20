@@ -3,12 +3,10 @@
  */
 package components;
 
-/**
- * @author dionel.martinez
- *
- */
+import java.awt.geom.Point2D;
+
 public class Road {
-	enum TrafficCongestionDegree{
+	public enum TrafficCongestionDegree{
 		NONE(0),
 		VERY_LOW(0.125),
 		LOW(0.25), 
@@ -44,9 +42,21 @@ public class Road {
 	}
 	
 	// TODO
+	
 	public double travelTime() {
-		
-		return -1;
+		return trafficLevel == TrafficCongestionDegree.CLOSED ? Double.POSITIVE_INFINITY : getDistance()/(speedLimit*(1-trafficLevel.degree));
+
+	}
+	
+	public double getDistance() {
+        return Point2D.distance(city1.x, city2.x, city1.y, city2.y);
+     }
+	
+	public City getCity1() {return city1;}
+	public City getCity2() {return city2;}
+	
+	public void setTrafficCongestionDegree(TrafficCongestionDegree tcd) {
+		this.trafficLevel = tcd;
 	}
 
 }

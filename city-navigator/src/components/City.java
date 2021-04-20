@@ -3,10 +3,6 @@
  */
 package components;
 
-/**
- * @author dionel.martinez
- *
- */
 public class City {
 
 	String name;
