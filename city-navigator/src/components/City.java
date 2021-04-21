@@ -18,25 +18,29 @@ public class City {
 		this.y = y;
 		this.roads = new LinkedList<>();
 	}
-
+	
+	/**
+	 * 
+	 * @param city
+	 * @return straight line distance to the given city
+	 * 
+	 */
 	public double distanceTo(City city) {
-		// Returns the straight line distance to
-		// the given city
-		return this.getPoint().distance(city.getPoint());
+		return Point2D.distance(x, y, city.getX(), city.getY());
 	}
 
 	public void addRoad(Road road) {
 		this.roads.add(road);
 	}
-
+	/**
+	 * 
+	 * @return list of cities reachable through the current citie's roads
+	 */
 	public LinkedList<City> getReachableCities() {
-		// Returns a list of cities reachable through the
-		// current citie's roads
-
 		LinkedList<City> reachableCities = new LinkedList<>();
 
 		for (Road road : this.roads) {
-			reachableCities.add(road.getCity1() == this ? road.getCity2() : road.getCity1());
+			reachableCities.add(road.getCity1().equals(this) ? road.getCity2() : road.getCity1());
 		}
 
 		return reachableCities;
@@ -54,20 +58,12 @@ public class City {
 		return this.y;
 	}
 
-	public Point2D getPoint() {
-		return new Point2D.Double(this.x, this.y);
-	}
-
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null)
+		if (o == null || getClass() != o.getClass())
 			return false;
-		if (getClass() != o.getClass())
-			return false;
-
 		City c = (City) o;
-		return this.name.equals(c.getName()) && this.getPoint().equals(c.getPoint());
+		
+		return this == c || (this.name.equals(c.getName()) && x == c.getX() && y == c.getY());
 	}
 }

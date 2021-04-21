@@ -21,23 +21,13 @@ public class Map {
     }
 
     public City getCity(String cityName) {
-        int index = 0;
 
         for (City city : this.cities) {
             if (city.getName().equals(cityName))
-                return this.getCity(index);
-            index++;
+                return city;
         }
 
         return null;
-    }
-
-    public City getCity(int index) {
-        if (index < 0 || index >= this.cityCount()) {
-            return null;
-        }
-
-        return this.cities.get(index);
     }
 
     public boolean addRoadBetweenCities(String city1Name, String city2Name, double distance, int speedLimit,
