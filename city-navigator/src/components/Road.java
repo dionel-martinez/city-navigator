@@ -41,44 +41,20 @@ public class Road {
 				: getDistance() / (speedLimit * (1 - trafficLevel.degree));
 	}
 
-	public City getCity1() {
-		return city1;
-	}
-
-	public void setCity1(City city1) {
-		this.city1 = city1;
-	}
-
-	public City getCity2() {
-		return city2;
-	}
-
-	public void setCity2(City city2) {
-		this.city2 = city2;
-	}
-
-	public int getSpeedLimit() {
-		return this.speedLimit;
-	}
-
-	public void setSpeedLimit(int speedLimit) {
-		this.speedLimit = speedLimit;
-	}
-
-	public TrafficCongestionDegree getTrafficCongestionDegree() {
-		return this.trafficLevel;
-	}
-
-	public void setTrafficCongestionDegree(TrafficCongestionDegree tcd) {
-		this.trafficLevel = tcd;
-	}
-
-	public double getDistance() {
-		return this.distance;
-	}
-
-	public void setDistance(double distance) {
-		this.distance = distance;
-	}
+	/**
+	 * 
+	 * GETTERS AND SETTERS
+	 */
+	public City getCity1() {return city1;}
+	public City getCity2() {return city2;}
+	public int getSpeedLimit() {return this.speedLimit;}
+	public TrafficCongestionDegree getTrafficCongestionDegree() {return this.trafficLevel;}
+	public double getDistance() {return this.distance;}
+	
+	public void setCity1(City city1) {this.city1 = city1;}
+	public void setCity2(City city2) {this.city2 = city2;}
+	public void setSpeedLimit(int speedLimit) {this.speedLimit = speedLimit;}
+	public void setTrafficCongestionDegree(TrafficCongestionDegree tcd) {this.trafficLevel = tcd;}
+	public void setDistance(double distance) {this.distance = distance;}
 
 }

@@ -51,7 +51,6 @@ public class Map {
         return true;
     }
 
-    public LinkedList<City> getCities() {
-        return this.cities;
-    }
+    public LinkedList<City> getCities() {return this.cities;}
+    
 }

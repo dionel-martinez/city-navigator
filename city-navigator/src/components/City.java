@@ -20,10 +20,8 @@ public class City {
 	}
 	
 	/**
-	 * 
 	 * @param city
 	 * @return straight line distance to the given city
-	 * 
 	 */
 	public double distanceTo(City city) {
 		return Point2D.distance(x, y, city.getX(), city.getY());
@@ -39,23 +37,10 @@ public class City {
 	public LinkedList<City> getReachableCities() {
 		LinkedList<City> reachableCities = new LinkedList<>();
 
-		for (Road road : this.roads) {
+		for (Road road : this.roads) 
 			reachableCities.add(road.getCity1().equals(this) ? road.getCity2() : road.getCity1());
-		}
-
+		
 		return reachableCities;
-	}
-
-	public String getName() {
-		return this.getName();
-	}
-
-	public double getX() {
-		return this.x;
-	}
-
-	public double getY() {
-		return this.y;
 	}
 
 	@Override
@@ -66,4 +51,13 @@ public class City {
 		
 		return this == c || (this.name.equals(c.getName()) && x == c.getX() && y == c.getY());
 	}
+	
+	/**
+	 * 
+	 * GETTERS
+	 */
+	public String getName() {return this.getName();}
+	public double getX() {return this.x;}
+	public double getY() {return this.y;}
+
 }
