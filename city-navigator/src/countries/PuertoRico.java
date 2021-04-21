@@ -7,11 +7,11 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import components.City;
+import components.Map;
 import components.Road;
 import components.Road.TrafficCongestionDegree;
-import graph.Graph;
 
-public class PuertoRico extends Graph<City> {
+public class PuertoRico extends Map{
 
 	public PuertoRico() {
 		super();
@@ -43,29 +43,28 @@ public class PuertoRico extends Graph<City> {
 	public City aguadilla = new City("Aguadilla",18.419396,-67.1711135);
 
 	private void addCities() {
-		addNode(cayey);
-		addNode(salinas);
-		addNode(santaIsabel);
-		addNode(barranquitas);
-		addNode(ponce);
-		addNode(villalba);
-		addNode(caguas);
-		addNode(arroyo);
-		addNode(humacao);
-		addNode(fajardo);
-		addNode(canovana);
-		addNode(sanJuan);
-		addNode(vegaBaja);
-		addNode(manati);
-		addNode(arecibo);
-		addNode(lares);
-		addNode(adjunta);
-		addNode(yauco);
-		addNode(lajas);
-		addNode(sanGerman);
-		addNode(mayaguez);
-		addNode(aguadilla);
-
+		addCity(cayey);
+		addCity(salinas);
+		addCity(santaIsabel);
+		addCity(barranquitas);
+		addCity(ponce);
+		addCity(villalba);
+		addCity(caguas);
+		addCity(arroyo);
+		addCity(humacao);
+		addCity(fajardo);
+		addCity(canovana);
+		addCity(sanJuan);
+		addCity(vegaBaja);
+		addCity(manati);
+		addCity(arecibo);
+		addCity(lares);
+		addCity(adjunta);
+		addCity(yauco);
+		addCity(lajas);
+		addCity(sanGerman);
+		addCity(mayaguez);
+		addCity(aguadilla);
 	}
 
 	private void createRoads() {
@@ -137,7 +136,7 @@ public class PuertoRico extends Graph<City> {
 			default: road.setTrafficCongestionDegree(TrafficCongestionDegree.NONE);
 			
 			}
-			addEdge(road.travelTime(), road.getCity1(), road.getCity2());
+			// addEdge(road.getTravelTime(), road.getCity1(), road.getCity2());
 		}
 
 	}
