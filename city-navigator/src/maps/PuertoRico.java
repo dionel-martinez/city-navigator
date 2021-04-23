@@ -1,7 +1,7 @@
 /**
  * 
  */
-package countries;
+package maps;
 
 import java.util.LinkedList;
 import java.util.Random;

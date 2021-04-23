@@ -30,9 +30,10 @@ public class City {
 	public void addRoad(Road road) {
 		this.roads.add(road);
 	}
+
 	/**
 	 * 
-	 * @return list of cities reachable through the current citie's roads
+	 * @return list of cities reachable through the current city's roads
 	 */
 	public LinkedList<City> getReachableCities() {
 		LinkedList<City> reachableCities = new LinkedList<>();
@@ -60,4 +61,12 @@ public class City {
 	public double getX() {return this.x;}
 	public double getY() {return this.y;}
 
+	/**
+	 * 
+	 *	SETTERS 
+	 */
+
+	public void setName(String name) {this.name = name;}
+	public void setX(double x) {this.x = x;}
+	public void setY(double y) {this.y = y;}
 }
