@@ -6,7 +6,7 @@ import components.Road.TrafficCongestionDegree;
 
 public class Map {
 
-    LinkedList<City> cities;
+    private LinkedList<City> cities;
 
     public Map() {
         this.cities = new LinkedList<>();
@@ -21,7 +21,6 @@ public class Map {
     }
 
     public City getCity(String cityName) {
-
         for (City city : this.cities) {
             if (city.getName().equals(cityName))
                 return city;
@@ -51,6 +50,21 @@ public class Map {
         return true;
     }
 
-    public LinkedList<City> getCities() {return this.cities;}
-    
+    public double getMaxRealSpeed() {
+        double max = Double.MIN_VALUE;
+
+        for (City city : this.cities) {
+            double maxRealSpeed = city.getMaxRealSpeed();
+            if (maxRealSpeed > max) {
+                max = maxRealSpeed;
+            }
+        }
+
+        return max;
+    }
+
+    public LinkedList<City> getCities() {
+        return this.cities;
+    }
+
 }

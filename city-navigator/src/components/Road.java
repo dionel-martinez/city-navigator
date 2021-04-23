@@ -33,12 +33,14 @@ public class Road {
 		this(from, to, distance, speedLimit, TrafficCongestionDegree.VERY_LOW);
 	}
 
-	// TODO
 	public double getTravelTime() {
 		// Return the travel time (cost) of a road
-
 		return trafficLevel == TrafficCongestionDegree.CLOSED ? Double.POSITIVE_INFINITY
-				: getDistance() / (speedLimit * (1 - trafficLevel.degree));
+				: getDistance() / this.getRealSpeed();
+	}
+
+	public double getRealSpeed() {
+		return this.speedLimit * (1 - this.trafficLevel.degree);
 	}
 
 	/**
