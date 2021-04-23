@@ -7,11 +7,13 @@ public class CityEntry implements Comparable<CityEntry> {
     private City city;
     private CityEntry parent;
     private double cost;
+    private double travelTimeToCity;
 
-    public CityEntry(City city, CityEntry parent, double cost) {
+    public CityEntry(City city, CityEntry parent, double cost, double travelTimeToCity) {
         this.city = city;
         this.parent = parent;
         this.cost = cost;
+        this.travelTimeToCity = travelTimeToCity;
     }
 
     @Override
@@ -41,6 +43,10 @@ public class CityEntry implements Comparable<CityEntry> {
         return this.cost;
     }
 
+    public double getTravelTimeToCity() {
+        return this.travelTimeToCity;
+    }
+
     // SETTERS
     public void setCity(City city) {
         this.city = city;
@@ -52,5 +58,9 @@ public class CityEntry implements Comparable<CityEntry> {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public void setTravelTimeToCity(double travelTimeToCity) {
+        this.travelTimeToCity = travelTimeToCity;
     }
 }

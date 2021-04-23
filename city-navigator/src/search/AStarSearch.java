@@ -1,6 +1,5 @@
 package search;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class AStarSearch implements Search {
         this.goalCity = map.getCity(goal);
         this.maxRealSpeed = map.getMaxRealSpeed();
 
-        CityEntry currentCityEntry = new CityEntry(startCity, null, 0);
+        CityEntry currentCityEntry = new CityEntry(startCity, null, 0, 0);
         if (this.goalTest(currentCityEntry.getCity())) {
             return this.buildSolution(currentCityEntry);
         }
@@ -54,32 +53,25 @@ public class AStarSearch implements Search {
 
     private SearchSolution buildSolution(CityEntry goal) {
         LinkedList<City> path = new LinkedList<>();
-        SearchSolution solution = new SearchSolution(null, 0);
 
-        buildSolutionHelper(goal, path, solution);
+        buildSolutionHelper(goal, path);
 
-        Collections.reverse(path);
-        solution.setPath(path);
-
-        return solution;
+        return new SearchSolution(path, goal.getTravelTimeToCity());
     }
 
-    private void buildSolutionHelper(CityEntry entry, LinkedList<City> path, SearchSolution solution) {
-        if (entry.getParent() == null) { // Reached start city
-            path.add(entry.getCity());
+    private void buildSolutionHelper(CityEntry entry, LinkedList<City> path) {
+        if (entry == null) { // Reached start city
             return;
         }
 
-        path.add(entry.getCity());
-        solution.setTravelTime(
-                solution.getTravelTime() + entry.getParent().getCity().getRoadTo(entry.getCity()).getTravelTime());
-
-        buildSolutionHelper(entry.getParent(), path, solution);
+        path.add(0, entry.getCity());
+        buildSolutionHelper(entry.getParent(), path);
     }
 
     private void addCitiesToFrontier(List<City> cities, CityEntry parent) {
         for (City city : cities) {
-            CityEntry newCity = new CityEntry(city, parent, this.getCost(city, parent));
+            CityEntry newCity = new CityEntry(city, parent, this.getCost(city, parent),
+                    this.getTravelTimeToCurrent(city, parent));
             if (!this.frontier.contains(newCity) && !this.explored.contains(newCity)) {
                 this.frontier.add(newCity);
             } else if (this.frontier.contains(newCity) && newCity.getCost() < this.getFromFrontier(newCity).getCost()) {
@@ -88,18 +80,29 @@ public class AStarSearch implements Search {
         }
     }
 
+    private double getTravelTimeToCurrent(City city, CityEntry parent) {
+        return parent.getTravelTimeToCity() + city.getRoadTo(parent.getCity()).getTravelTime();
+    }
+
     private double getCost(City city, CityEntry parent) {
         double roadTravelTime = city.getRoadTo(parent.getCity()).getTravelTime();
         return roadTravelTime == Double.POSITIVE_INFINITY ? roadTravelTime
-                : parent.getCost() + roadTravelTime + city.distanceTo(goalCity) / this.maxRealSpeed;
+                : parent.getTravelTimeToCity() + roadTravelTime + city.distanceTo(this.goalCity) / this.maxRealSpeed;
     }
 
     private void replaceFrontierEntry(CityEntry cityEntry) {
-        CityEntry oldEntry = this.getFromFrontier(cityEntry);
+        PriorityQueue<CityEntry> newQueue = new PriorityQueue<>();
 
-        // Update old entry with new values
-        oldEntry.setCost(cityEntry.getCost());
-        oldEntry.setParent(cityEntry.getParent());
+        while (!this.frontier.isEmpty()) {
+            CityEntry temp = this.frontier.poll();
+            if (temp.equals(cityEntry)) {
+                newQueue.add(cityEntry);
+            } else {
+                newQueue.add(temp);
+            }
+        }
+
+        this.frontier = newQueue;
     }
 
     private CityEntry getFromFrontier(CityEntry cityEntry) {

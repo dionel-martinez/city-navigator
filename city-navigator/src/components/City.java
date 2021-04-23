@@ -3,7 +3,6 @@
  */
 package components;
 
-import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
 public class City {
@@ -24,20 +23,19 @@ public class City {
 	 * @return straight line distance to the given city
 	 */
 	public double distanceTo(City city) {
-		int Radius=6371;//radius of earth in Km         
-        double lat1 = this.x;
-        double lat2 = city.x;
-        double lon1 = this.y;
-        double lon2 = city.y;
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLon = Math.toRadians(lon2-lon1);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-        Math.sin(dLon/2) * Math.sin(dLon/2);
-        double c = 2 * Math.asin(Math.sqrt(a));
-        double valueResult= Radius*c;
+		int Radius = 6371;// radius of earth in Km
+		double lat1 = this.x;
+		double lat2 = city.x;
+		double lon1 = this.y;
+		double lon2 = city.y;
+		double dLat = Math.toRadians(lat2 - lat1);
+		double dLon = Math.toRadians(lon2 - lon1);
+		double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(Math.toRadians(lat1))
+				* Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+		double c = 2 * Math.asin(Math.sqrt(a));
+		double valueResult = Radius * c;
 
-        return valueResult;
+		return valueResult;
 	}
 
 	public void addRoad(Road road) {
@@ -93,7 +91,7 @@ public class City {
 	 * GETTERS
 	 */
 	public String getName() {
-		return this.getName();
+		return this.name;
 	}
 
 	public double getX() {
