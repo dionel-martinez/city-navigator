@@ -2,15 +2,15 @@ package search;
 
 import components.City;
 
-public class CityEntry {
+public class CityEntry implements Comparable<CityEntry> {
 
     private City city;
-    private City parentCity;
+    private CityEntry parent;
     private double cost;
 
-    public CityEntry(City city, City parentCity, double cost) {
+    public CityEntry(City city, CityEntry parent, double cost) {
         this.city = city;
-        this.parentCity = parentCity;
+        this.parent = parent;
         this.cost = cost;
     }
 
@@ -20,18 +20,21 @@ public class CityEntry {
             return false;
         CityEntry c = (CityEntry) o;
 
-        return this == c || (this.city.equals(c.getCity()) && this.cost == c.getCost());
+        return this.city.equals(c.getCity());
     }
 
-    // TODO: Implement compare to
+    @Override
+    public int compareTo(CityEntry o) {
+        return Double.compare(this.cost, o.getCost());
+    }
 
     // GETTERS
     public City getCity() {
         return this.city;
     }
 
-    public City getParentCity() {
-        return this.parentCity;
+    public CityEntry getParent() {
+        return this.parent;
     }
 
     public double getCost() {
@@ -43,8 +46,8 @@ public class CityEntry {
         this.city = city;
     }
 
-    public void setParentCity(City parentCity) {
-        this.parentCity = parentCity;
+    public void setParent(CityEntry parentCity) {
+        this.parent = parentCity;
     }
 
     public void setCost(double cost) {
