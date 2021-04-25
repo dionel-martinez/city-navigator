@@ -5,9 +5,9 @@ import java.util.LinkedList;
 import components.Road;
 import components.Road.TrafficCongestionDegree;
 
-public class PuertoRicoVarying extends PuertoRico {
+public class PuertoRicoClosed extends PuertoRico {
 
-    public PuertoRicoVarying() {
+    public PuertoRicoClosed() {
         addCities();
         createRoads();
     }
@@ -15,7 +15,7 @@ public class PuertoRicoVarying extends PuertoRico {
     protected void createRoads() {
         LinkedList<Road> roads = new LinkedList<Road>();
 
-        roads.add(new Road(ponce, santaIsabel, 24, 100, TrafficCongestionDegree.VERY_HIGH));
+        roads.add(new Road(ponce, santaIsabel, 24, 100, TrafficCongestionDegree.CLOSED));
         roads.add(new Road(salinas, santaIsabel, 12, 100, TrafficCongestionDegree.MEDIUM));
         roads.add(new Road(salinas, cayey, 28, 100));
         roads.add(new Road(salinas, arroyo, 33, 100));
@@ -25,14 +25,14 @@ public class PuertoRicoVarying extends PuertoRico {
         roads.add(new Road(canovanas, fajardo, 32, 100));
         roads.add(new Road(canovanas, caguas, 36, 100));
         roads.add(new Road(sanJuan, canovanas, 30, 100));
-        roads.add(new Road(sanJuan, vegaBaja, 47, 100, TrafficCongestionDegree.MEDIUM));
+        roads.add(new Road(sanJuan, vegaBaja, 47, 100, TrafficCongestionDegree.CLOSED));
         roads.add(new Road(sanJuan, caguas, 33, 100));
-        roads.add(new Road(cayey, caguas, 25, 100, TrafficCongestionDegree.HIGH));
+        roads.add(new Road(cayey, caguas, 25, 100, TrafficCongestionDegree.CLOSED));
         roads.add(new Road(cayey, barranquitas, 30, 100));
         roads.add(new Road(barranquitas, santaIsabel, 40, 100));
         roads.add(new Road(barranquitas, villalba, 33, 100));
-        roads.add(new Road(ponce, villalba, 30, 100, TrafficCongestionDegree.LOW_MED));
-        roads.add(new Road(ponce, adjuntas, 25, 100, TrafficCongestionDegree.MEDIUM));
+        roads.add(new Road(ponce, villalba, 30, 100, TrafficCongestionDegree.HIGH));
+        roads.add(new Road(ponce, adjuntas, 25, 100, TrafficCongestionDegree.CLOSED));
         roads.add(new Road(ponce, yauco, 35, 100));
         roads.add(new Road(yauco, sanGerman, 27, 100));
         roads.add(new Road(yauco, lajas, 30, 100));
