@@ -6,12 +6,14 @@ package main;
 import java.util.LinkedList;
 import java.util.List;
 
+import components.City;
 import components.Map;
 import maps.PuertoRico;
 import maps.PuertoRicoClosed;
 import maps.PuertoRicoRandom;
 import maps.PuertoRicoVarying;
 import search.AStarSearch;
+import search.BestFirstSearch;
 import search.RandomSearch;
 import search.Search;
 import search.SearchSolution;
@@ -28,11 +30,14 @@ public class CityNavigator {
 	public static void main(String[] args) {
 		List<Search> algorithms = new LinkedList<>();
 
-		AStarSearch aStar = new AStarSearch();
-		RandomSearch randSearch = new RandomSearch();
+		Search aStar = new AStarSearch();
+		Search randSearch = new RandomSearch();
+		Search bestFirstSearch = new BestFirstSearch();
+		
 
 		algorithms.add(aStar);
 		algorithms.add(randSearch);
+		algorithms.add(bestFirstSearch);
 
 		PuertoRico basePR = new PuertoRico();
 		PuertoRico varyingPR = new PuertoRicoVarying();
@@ -52,16 +57,23 @@ public class CityNavigator {
 	private static void printSolution(SearchSolution solution) {
 		System.out.println("\t*** PATH ***");
 		System.out.print("\t");
-		for (int i = 0; i < solution.getPath().size(); i++) {
+		
+		if(solution == null) {
+			System.out.println("Does not exist!");
+			return;
+		}
+		
+		int i=0;
+		for (City c : solution.getPath()) {
 			if (i == solution.getPath().size() - 1) {
-				System.out.print(solution.getPath().get(i).getName());
+				System.out.print(c.getName());
 			} else {
-				System.out.print(solution.getPath().get(i).getName() + " --> ");
+				System.out.print(c.getName() + " --> ");
 			}
+			i++;
 		}
 
-		System.out.println();
-		System.out.println("\t*** TRAVEL TIME ***");
+		System.out.println("\n\t*** TRAVEL TIME ***");
 		System.out.println("\t" + solution.getTravelTime() + " hrs");
 	}
 
