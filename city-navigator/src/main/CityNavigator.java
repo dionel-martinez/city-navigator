@@ -3,13 +3,20 @@
  */
 package main;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import components.Map;
 import maps.PuertoRico;
+import maps.PuertoRicoClosed;
 import maps.PuertoRicoRandom;
+import maps.PuertoRicoVarying;
 import search.AStarSearch;
+import search.Search;
 import search.SearchSolution;
 
 /**
- * @author dionel.martinez
+ * @author dionel.martinez, milton.pagan1, jesus.garcia15
  *
  */
 public class CityNavigator {
@@ -18,18 +25,30 @@ public class CityNavigator {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		PuertoRico mapPR = new PuertoRicoRandom();
+		List<Search> algorithms = new LinkedList<>();
 
 		AStarSearch aStar = new AStarSearch();
 
-		SearchSolution aStarSol = aStar.search(mapPR, "Ponce", "San Juan");
+		algorithms.add(aStar);
 
-		System.out.println("***** ASTAR ******");
-		printSolution(aStarSol);
+		PuertoRico basePR = new PuertoRico();
+		PuertoRico varyingPR = new PuertoRicoVarying();
+		PuertoRico closedPR = new PuertoRicoClosed();
+		PuertoRico randomPR = new PuertoRicoRandom();
+
+		System.out.println("\n******* Base Map ********");
+		test(algorithms, basePR, "Ponce", "San Juan");
+		System.out.println("\n******* Varying traffic ********");
+		test(algorithms, varyingPR, "Ponce", "San Juan");
+		System.out.println("\n******* Closed roads ********");
+		test(algorithms, closedPR, "Ponce", "San Juan");
+		System.out.println("\n******* Random traffic ********");
+		test(algorithms, randomPR, "Ponce", "San Juan");
 	}
 
 	private static void printSolution(SearchSolution solution) {
-		System.out.println("*** PATH ***");
+		System.out.println("\t*** PATH ***");
+		System.out.print("\t");
 		for (int i = 0; i < solution.getPath().size(); i++) {
 			if (i == solution.getPath().size() - 1) {
 				System.out.print(solution.getPath().get(i).getName());
@@ -39,8 +58,14 @@ public class CityNavigator {
 		}
 
 		System.out.println();
-		System.out.println("*** TRAVEL TIME ***");
-		System.out.println(solution.getTravelTime() + " hrs");
+		System.out.println("\t*** TRAVEL TIME ***");
+		System.out.println("\t" + solution.getTravelTime() + " hrs");
 	}
 
+	private static void test(List<Search> searchAlgs, Map map, String start, String goal) {
+		for (Search search : searchAlgs) {
+			System.out.println("\n***** " + search.getIdentifier() + " *****");
+			printSolution(search.search(map, start, goal));
+		}
+	}
 }
