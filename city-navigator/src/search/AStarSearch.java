@@ -13,6 +13,7 @@ public class AStarSearch implements Search {
 
     private PriorityQueue<CityEntry> frontier;
     private Set<CityEntry> explored;
+    private final String id = "ASTAR";
 
     private City goalCity;
     private double maxRealSpeed;
@@ -26,6 +27,9 @@ public class AStarSearch implements Search {
     public SearchSolution search(Map map, String start, String goal) {
         if (map.getCity(start) == null || map.getCity(goal) == null)
             return null;
+
+        this.frontier = new PriorityQueue<>();
+        this.explored = new HashSet<>();
 
         City startCity = map.getCity(start);
         this.goalCity = map.getCity(goal);
@@ -118,4 +122,7 @@ public class AStarSearch implements Search {
         return city.equals(this.goalCity);
     }
 
+    public String getIdentifier() {
+        return this.id;
+    }
 }
