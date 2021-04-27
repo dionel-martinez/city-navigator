@@ -57,7 +57,7 @@ public class RandomSearch implements Search{
 				CityEntry child = new CityEntry(nextCity, currentCityEntry,
 						this.getCost(nextCity, currentCityEntry), 
 						this.getTravelTimeToCurrent(nextCity, currentCityEntry)); 
-				totalTimeTravel = totalTimeTravel + this.getTravelTimeToCurrent(nextCity, currentCityEntry);
+				totalTimeTravel = this.getTravelTimeToCurrent(nextCity, currentCityEntry);
 				currentCityEntry = child;
 				visited.add(currentCityEntry.getCity());
 			}
