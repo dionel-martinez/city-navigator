@@ -51,11 +51,13 @@ public class RandomSearch implements Search{
 		CityEntry currentCityEntry = new CityEntry(startCity, null, 0, 0);
 		LinkedList<City> path = new LinkedList<>();
 		path.add(startCity);
+		visited.add(startCity);
 		SearchSolution solution = new SearchSolution(path, 0);
 		
 		while(!currentCityEntry.getCity().equals(this.goalCity)) {
-			City nextCity = currentCityEntry.getCity().getReachableCities().get(rand.nextInt(currentCityEntry.getCity().getReachableCities().size()));
-			if(!visited.contains(currentCityEntry.getCity())) {
+			int index = rand.nextInt(currentCityEntry.getCity().getReachableCities().size());
+			City nextCity = currentCityEntry.getCity().getReachableCities().get(index);
+			if(!visited.contains(nextCity)) {
 				path.add(nextCity);
 				CityEntry child = new CityEntry(nextCity, currentCityEntry,
 						this.getCost(nextCity, currentCityEntry), 
@@ -63,6 +65,17 @@ public class RandomSearch implements Search{
 				totalTimeTravel = totalTimeTravel + this.getTravelTimeToCurrent(nextCity, currentCityEntry);
 				currentCityEntry = child;
 				visited.add(currentCityEntry.getCity());
+			}
+			else {
+				boolean stuck = true;
+				for(City city : currentCityEntry.getCity().getReachableCities()) {
+					if(!visited.contains(city)) {
+						stuck = false;
+					}
+				}
+				if(stuck) {
+					currentCityEntry = currentCityEntry.getParent();
+				}
 			}
 
 		}
