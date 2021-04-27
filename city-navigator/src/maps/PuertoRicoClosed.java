@@ -41,6 +41,7 @@ public class PuertoRicoClosed extends PuertoRico {
         roads.add(new Road(mayaguez, aguadilla, 28, 100));
         roads.add(new Road(lares, adjuntas, 32, 100));
         roads.add(new Road(lares, arecibo, 29, 100));
+		roads.add(new Road(lares, mayaguez, 47, 100));
         roads.add(new Road(aguadilla, arecibo, 50, 100));
         roads.add(new Road(arecibo, manati, 30, 100));
         roads.add(new Road(manati, barranquitas, 55, 100));
