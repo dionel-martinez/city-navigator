@@ -2,31 +2,26 @@ package search;
 
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Random;
-import java.util.Set;
 
 import components.City;
 import components.Map;
-import components.Road;
 
 public class RandomSearch implements Search{
 	
-	private Set<CityEntry> explored;
+	
 	private City goalCity;
     private double maxRealSpeed;
 	private Random rand = new Random();
+	private int iterations = 100;
 	
-	public RandomSearch() {
-		this.explored = new HashSet<CityEntry>();
-	}
+	
 	
 	@Override
 	public SearchSolution search(Map map, String start, String goal) {
 		
 		SearchSolution min = searchHelper(map, start, goal);
-		for (int i = 0; i < 600; i++) {
+		for (int i = 0; i < this.iterations; i++) {
 			SearchSolution randomPath = searchHelper(map, start, goal);
 			if(randomPath.getTravelTime() < min.getTravelTime()) {
 				min = randomPath;
@@ -92,4 +87,9 @@ public class RandomSearch implements Search{
     private double getTravelTimeToCurrent(City city, CityEntry parent) {
         return parent.getTravelTimeToCity() + city.getRoadTo(parent.getCity()).getTravelTime();
     }
+
+	@Override
+	public String getIdentifier() {
+		return "Random Search";
+	}
 }
