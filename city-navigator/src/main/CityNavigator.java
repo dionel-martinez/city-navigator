@@ -12,6 +12,7 @@ import maps.PuertoRicoClosed;
 import maps.PuertoRicoRandom;
 import maps.PuertoRicoVarying;
 import search.AStarSearch;
+import search.RandomSearch;
 import search.Search;
 import search.SearchSolution;
 
@@ -28,8 +29,10 @@ public class CityNavigator {
 		List<Search> algorithms = new LinkedList<>();
 
 		AStarSearch aStar = new AStarSearch();
+		RandomSearch randSearch = new RandomSearch();
 
 		algorithms.add(aStar);
+		algorithms.add(randSearch);
 
 		PuertoRico basePR = new PuertoRico();
 		PuertoRico varyingPR = new PuertoRicoVarying();
