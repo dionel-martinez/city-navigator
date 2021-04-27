@@ -12,7 +12,7 @@ public class PuertoRicoClosed extends PuertoRico {
         createRoads();
     }
 
-    protected void addRoads() {
+    protected void createRoads() {
         LinkedList<Road> roads = new LinkedList<Road>();
 
         roads.add(new Road(ponce, santaIsabel, 24, 100, TrafficCongestionDegree.CLOSED));
