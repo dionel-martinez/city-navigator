@@ -37,6 +37,7 @@ public class BestFirstSearch implements Search {
 			return null;
 
 		frontier = new PriorityQueue<>();
+		explored = new HashSet<>();
         maxRealSpeed = map.getMaxRealSpeed();
         
         CityEntry currentCityEntry = new CityEntry(startCity, null, 0, 0);

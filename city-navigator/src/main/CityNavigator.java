@@ -36,8 +36,9 @@ public class CityNavigator {
 		
 
 		algorithms.add(aStar);
-		algorithms.add(randSearch);
 		algorithms.add(bestFirstSearch);
+		algorithms.add(randSearch);
+
 
 		PuertoRico basePR = new PuertoRico();
 		PuertoRico varyingPR = new PuertoRicoVarying();
